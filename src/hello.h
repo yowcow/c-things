@@ -4,10 +4,7 @@
 #include <stdlib.h>
 #include <stdio.h>
 
-struct member {
-    int id;
-    char* name;
-};
+#include "member.h"
 
 char* get_message(char* name) {
     char* message = (char *) malloc(sizeof(char) * 100);
