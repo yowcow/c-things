@@ -50,7 +50,7 @@ int test_create_members() {
     assert(strcmp(members[1]->name, "fuga")   == 0);
     assert(strcmp(members[2]->name, "foobar") == 0);
 
-    for (i = sizeof(members) - 1; i >= 0; i--) {
+    for (i = 2; i >= 0; i--) {
         free(members[i]);
     }
 
