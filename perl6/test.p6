@@ -1,10 +1,17 @@
 use v6;
+use LibraryMake;
 use NativeCall;
 use Test;
 
 class MyNative {
 
-    sub library { './libhello.so'; }
+    sub library {
+        state $lib ||= do {
+            my $so = get-vars('')<SO>;
+            "./libhello{$so}";
+        };
+        $lib;
+    }
 
     our sub get-message(Str:D $name --> Str)
         is native(&library)
@@ -22,7 +29,8 @@ class MyNative {
         { * }
 }
 
-is MyNative::get-message("Hoge"), "Hello world, Hoge";
+is MyNative::get-message("1234"),   "Hello world, 1234";
+is MyNative::get-message("Hoge"),   "Hello world, Hoge";
 is MyNative::get-message("あばば"), "Hello world, あばば";
 
 {
