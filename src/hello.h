@@ -5,19 +5,13 @@
 #include <stdio.h>
 #include <string.h>
 
-#include "member.h"
+typedef struct member {
+    int id;
+    char* name;
+} member_t;
 
-char* get_message(char* name) {
-    char* message = (char*) malloc(sizeof(char) * (strlen(name) + 14));
-    sprintf(message, "Hello world, %s", name);
-    return message;
-}
+char* get_message(char* name);
 
-member_t* create_member(int id, char* name) {
-    member_t* mem_ptr = (member_t*) malloc(sizeof(member_t));
-    mem_ptr->id = id;
-    mem_ptr->name = name;
-    return mem_ptr;
-}
+member_t* create_member(int id, char* name);
 
 #endif
