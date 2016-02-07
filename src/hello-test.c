@@ -46,9 +46,9 @@ int test_create_members() {
     assert(members[1]->id == 2);
     assert(members[2]->id == 3);
 
-    assert(members[0]->name == "hoge");
-    assert(members[1]->name == "fuga");
-    assert(members[2]->name == "foobar");
+    assert(strcmp(members[0]->name, "hoge")   == 0);
+    assert(strcmp(members[1]->name, "fuga")   == 0);
+    assert(strcmp(members[2]->name, "foobar") == 0);
 
     for (i = sizeof(members) - 1; i >= 0; i--) {
         free(members[i]);
