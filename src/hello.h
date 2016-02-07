@@ -14,7 +14,7 @@ char* get_message(char* name) {
 }
 
 struct member create_member(int id, char* name) {
-    struct member mem = { id, name };
+    member_t mem = { id, name };
     return mem;
 }
 

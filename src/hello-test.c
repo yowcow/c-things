@@ -16,7 +16,7 @@ int test_get_message() {
 }
 
 int test_create_member() {
-    struct member m;
+    member_t m;
     m = create_member(1234, "hoge");
 
     assert(m.id == 1234);
