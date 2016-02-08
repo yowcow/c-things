@@ -1,5 +1,8 @@
 BUILD_OS := $(shell uname)
 
+DESTDIR=build
+SRCDIR=src
+
 CC=gcc -Wall -fPIC
 
 ifeq ($(BUILD_OS),Linux)
@@ -12,17 +15,18 @@ SO=dylib
 SHARED=-dynamiclib
 endif
 
-libhello.$(SO): src/hello.o
-	$(CC) $(SHARED) -O3 -DNDEBUG -lpthread -o libhello.$(SO) src/hello.o
+$(DESTDIR)/libhello.$(SO): $(DESTDIR)/hello.o
+	$(CC) $(SHARED) -O3 -DNDEBUG -lpthread -o $(DESTDIR)/libhello.$(SO) $(DESTDIR)/hello.o
 
-src/hello.o: src/hello.c
-	$(CC) -c -O3 -DNDEBUG -D_REENTRANT -D_FILE_OFFSET_BITS=64 -o src/hello.o src/hello.c
+$(DESTDIR)/hello.o: $(SRCDIR)/hello.c
+	mkdir -p $(DESTDIR)
+	$(CC) -c -O3 -DNDEBUG -D_REENTRANT -D_FILE_OFFSET_BITS=64 -o $(DESTDIR)/hello.o $(SRCDIR)/hello.c
 
-test: hello-test
-	LD_LIBRARY_PATH=. ./hello-test
+test: $(DESTDIR)/hello-test
+	LD_LIBRARY_PATH=. $(DESTDIR)/hello-test
 
-hello-test: libhello.$(SO) src/hello.o
-	$(CC) -I./ -L./ -o hello-test src/hello-test.c -lhello
+$(DESTDIR)/hello-test: $(DESTDIR)/libhello.$(SO) $(SRCDIR)/hello.o
+	$(CC) -I$(DESTDIR) -L$(DESTDIR) -o $(DESTDIR)/hello-test $(SRCDIR)/hello-test.c -lhello
 
 clean:
-	-rm src/hello.o libhello.$(SO) hello-test
+	-rm $(DESTDIR)/hello.o $(DESTDIR)/libhello.$(SO) $(DESTDIR)/hello-test
