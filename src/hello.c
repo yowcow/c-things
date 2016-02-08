@@ -1,4 +1,6 @@
+#include <stdlib.h>
 #include <stdio.h>
+#include <string.h>
 #include "hello.h"
 
 char* get_message(char* name) {
@@ -9,7 +11,7 @@ char* get_message(char* name) {
 
 member_t* create_member(int id, char* name) {
     member_t* mem_ptr = (member_t*) malloc(sizeof(member_t));
-    mem_ptr->id = id;
+    mem_ptr->id   = id;
     mem_ptr->name = name;
     return mem_ptr;
 }
