@@ -8,7 +8,7 @@ class MyNative {
     sub library {
         state $lib ||= do {
             my $so = get-vars('')<SO>;
-            "./libhello{$so}";
+            "./build/libhello{$so}";
         };
         $lib;
     }
