@@ -23,7 +23,7 @@ $(DESTDIR)/hello.o: $(SRCDIR)/hello.c
 	$(CC) -c -O3 -DNDEBUG -D_REENTRANT -D_FILE_OFFSET_BITS=64 -o $(DESTDIR)/hello.o $(SRCDIR)/hello.c
 
 test: $(DESTDIR)/hello-test
-	LD_LIBRARY_PATH=. $(DESTDIR)/hello-test
+	LD_LIBRARY_PATH=$(DESTDIR) $(DESTDIR)/hello-test
 
 $(DESTDIR)/hello-test: $(DESTDIR)/libhello.$(SO) $(SRCDIR)/hello.o
 	$(CC) -I$(DESTDIR) -L$(DESTDIR) -o $(DESTDIR)/hello-test $(SRCDIR)/hello-test.c -lhello
