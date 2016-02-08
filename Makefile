@@ -25,7 +25,7 @@ $(DESTDIR)/hello.o: $(SRCDIR)/hello.c
 test: $(DESTDIR)/hello-test
 	LD_LIBRARY_PATH=$(DESTDIR) $(DESTDIR)/hello-test
 
-$(DESTDIR)/hello-test: $(DESTDIR)/libhello.$(SO) $(SRCDIR)/hello.o
+$(DESTDIR)/hello-test: $(DESTDIR)/libhello.$(SO) $(DESTDIR)/hello.o
 	$(CC) -I$(SRCDIR) -L$(DESTDIR) -o $(DESTDIR)/hello-test $(SRCDIR)/hello-test.c -lhello
 
 clean:
